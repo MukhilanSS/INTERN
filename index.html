@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- Docment Type Declaration, it tells the browser that is HTML 5 Document , idhu ilana we cant load the page(not rendor)-->
+<html lang="en"> <!--root element and specifies the language of the page is english-->
+
+<head><!--contains the meta data information about the document-->
+    <meta charset="UTF-8"><!-- Utf-8 is character encoding to accept the special characters-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--set width to the screen depends on devices and inital scaling is avoid from beinf zoom out-->
+    <title>Form Validation </title><!-- it set the title of the web page in tab-->
+    <link rel="stylesheet" href="style.css"><!--rel defines relationship between current html file linked with resourse , stylesheet tells browser linked with css stylesheet(External File) -->
+</head>
+
+<body>
+    <div class="form-container"><!-- maximum width of form container , auto margin(left,right) , padding , color ,  rounder corners(large radius)-->
+        <h1 class="form-title">Form Validation</h1><!--font size 1.5rem, bold, center, margin bottom 1 rem(16px)-->
+        <span id="e0" class="error"></span>
+        <form class="form-grid" id="form1" onsubmit="return validateForm()"><!--grid,creates 1 column(defaut mobiles),Medium size screen and larger ku 2, sapce between grid 4-->
+            <div class="form-group">
+                <label for="bookName">Book Name : </label><!-- block kila mela semi bold-->
+                <input type="text" id="bookName" name="bookName" placeholder="Enter book name" tabindex="1">
+                <span id="e1" class="error"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label for="authorName">Author Name : </label>
+                <input type="text" id="authorName" name="authorName" placeholder="Enter author name" tabindex="2">
+                <span id="e2" class="error"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label for="authorMail">Author Mail: </label>
+                <input type="text" id="authorMail" name="authorMail" placeholder="Enter author mail" tabindex="3">
+                <span id="e3" class="error"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label for="publisher">Publisher : </label>
+                <input type="text" name="publisher" id="publisher" placeholder="Enter publisher " tabindex="4">
+                <span id="e4" class="error"></span>
+
+            </div>
+
+            <div class="form-group full-width">
+                <label for="description">Description : </label>
+                <textarea name="description" id="description" placeholder="Enter the book description" tabindex="5" rows="3"></textarea>
+                <span id="e5" class="error"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price : </label>
+                <input type="number" name="price" id="price" placeholder="Enter the book price" tabindex="6">
+                <span id="e6" class="error"></span>
+
+            </div>
+
+            <div class="form-group full-width text-center">
+                <button type="submit" id="submit-btn">Submit</button> 
+            </div>
+
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
