@@ -1,3 +1,45 @@
+document.getElementById("form1").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    if (!validateForm()) return;
+
+    const bookName = document.getElementById("bookName").value.trim();
+    const authorName = document.getElementById("authorName").value.trim();
+    const authorMail = document.getElementById("authorMail").value.trim();
+    const publisher = document.getElementById("publisher").value.trim();
+    const description = document.getElementById("description").value.trim();
+    const price = document.getElementById("price").value.trim();
+
+
+    const bookData={
+        bookName,
+        authorName,
+        authorMail,
+        publisher,
+        description,
+        price
+    };
+    try{
+        const response=await fetch("http://localhost:5000/books",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(bookData)
+        });
+        if(response.ok){
+            alert("Book added sucessfully!");
+            window.location.href="books.html";
+        }else{
+            const errorData= await response.json();
+            alert("Error:"+errorData.erro);
+        }
+    }catch(error){
+        console.error("Error:",error);
+        alert("Something went wrong . please try again");
+    }
+});
+
 function validateForm() {
     let error = false;
 
