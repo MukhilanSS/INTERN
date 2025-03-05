@@ -12,7 +12,7 @@ async function submitForm(event){
         });
         if (response.ok) {
             alert("Book added successfully!");
-            window.location.href = "book.html"; // Redirect to book listing page
+            window.location.href = "books.html"; // Redirect to book listing page
         } else {
             const errorData = await response.json();
             alert("Error: " + (errorData.error || "Failed to add book"));
@@ -53,6 +53,30 @@ async function updateForm(bookId) {
         alert("Something went wrong. Please try again later.");
     }
 }
+async function deleteBook(id) {
+    if (!confirm("Are you sure you want to delete this book?")) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/books/${id}`, {
+            method: "DELETE",
+        });
+
+        if (response.ok) {
+            alert("Book deleted successfully");
+            window.location.reload(); // Refresh book list
+        } else {
+            const errorData = await response.json();
+            alert("Error: " + (errorData.error || "Failed to delete book"));
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong. Please try again later.");
+    }
+}
+
+
 
 
 

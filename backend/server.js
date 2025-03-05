@@ -93,6 +93,19 @@ app.put("/books/:id", async (req, res) => {
   }
 });
 
+app.delete('/books/:id',async(req,res)=>{
+    try{
+        const {id}= req.params;
+        const delteBook=await Book.findByIdAndDelete(id);
+        if(!deleteBook){
+            return res.status(404).json({error:"Book not found"});
+        }
+        res.json({message:"Book deleted sucessfully"});
+    }catch(error){
+        res.status(500).json({error:error.message});
+    }
+})
+
 /**process.env.PORT || 5000 → Uses the port from .env, or defaults to 5000.
 app.listen(PORT, () => console.log(...)) → Starts the server and logs a message. */
 const PORT = process.env.PORT || 5000;
