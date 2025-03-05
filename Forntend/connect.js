@@ -15,7 +15,7 @@ function fetchBooks() {
                     <td>${book.publisher}</td>
                     <td class="text-end">
                         <button class="btn btn-info btn-sm me-2" onclick="getBookDetails('${book._id}')">Get</button>
-                        <button class="btn btn-warning btn-sm me-2" onclick="updateBook('${book._id}')">Update</button>
+                        <button class="btn btn-warning btn-sm me-2" onclick="updateBookDetails('${book._id}')">Update</button>
                         <button class="btn btn-danger btn-sm" onclick="deleteBook('${book._id}')">Delete</button>
                     </td>
                 </tr>`;
@@ -37,6 +37,26 @@ function getBookDetails(bookId) {
                 `Description: ${book.description}\n` +
                 `Price: $${book.price}`
             );
+        })
+        .catch(error => console.error("Error fetching book details:", error));
+}
+function updateBookDetails(bookId) {
+    console.log("Fetching details for book ID:", bookId); 
+
+    fetch(`http://localhost:5000/books/${bookId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Book not found");
+            }
+            return response.json();
+        })
+        .then(book => {
+            if (!book) {
+                alert("Book Not Found");
+                return;
+            }
+            localStorage.setItem("editBook", JSON.stringify(book));
+            window.location.href = "form.html"; 
         })
         .catch(error => console.error("Error fetching book details:", error));
 }
