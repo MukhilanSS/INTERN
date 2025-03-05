@@ -29,7 +29,14 @@ If an error occurs, we send a 400 Bad Request response with the error message.*/
 
 
 app.post('/books',async(req,res)=>{
+    console.log("Received data:", req.body);
     try{
+        const {bookName,authorName}=req.body;
+        const existingBook =await Book.findOne({bookName,authorName});
+        if(existingBook){
+            return res.status(400).json({error:"This book is already exit by the authout"});
+
+        }
         const book=new Book(req.body);
         await book.save();
         res.status(201).json(book);
@@ -61,6 +68,7 @@ app.get('/books/:bookId', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 
 
